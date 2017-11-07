@@ -1,7 +1,4 @@
-import React from 'react';
-
 import Setup from '../app/containers/Setup';
+import Home from '../app/views/Home';
 
-const component = ({ data }) => <pre>{ JSON.stringify(data, null, 2) }</pre>;
-
-export default Setup(component, 'api/posts');
+export default Setup(Home, 'api/posts');
