@@ -3,10 +3,12 @@ const next = require('next');
 const bodyParser = require('body-parser');
 const CORS = require('cors');
 
+const routes = require('./routes');
+
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
-const handle = app.getRequestHandler();
+const handler = routes.getRequestHandler(app);
 
 const postController = require('./controllers/postController');
 
@@ -26,9 +28,9 @@ app
   .prepare()
   .then(() => {
     server.get('/api/posts', postController.getPosts);
-    server.get('/api/posts/:slug', postController.getPost);
+    server.get('/api/post', postController.getPost);
 
-    server.get('*', (req, res) => handle(req, res));
+    server.use(handler);
 
     server.listen(port, (err) => {
       if (err) throw err;

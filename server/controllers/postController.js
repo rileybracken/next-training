@@ -12,7 +12,7 @@ exports.getPost = async (req, res) => {
   const data = await client.getEntries({
     content_type: 'post',
     include: 2,
-    'fields.slug': req.params.slug,
+    'fields.slug': req.query.slug,
   });
 
   return res.json(data.items[0]);
