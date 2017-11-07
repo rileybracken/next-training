@@ -8,6 +8,8 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+const postController = require('./controllers/postController');
+
 // import environmental variables from our .env file
 require('dotenv').load();
 
@@ -23,6 +25,9 @@ server.use(CORS());
 app
   .prepare()
   .then(() => {
+    server.get('/api/posts', postController.getPosts);
+    server.get('/api/posts/:slug', postController.getPost);
+
     server.get('*', (req, res) => handle(req, res));
 
     server.listen(port, (err) => {

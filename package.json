@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "dev": "node ./server/index.js",
+    "start": "NODE_ENV=production node server"
   },
   "dependencies": {
     "autoprefixer": "^7.1.6",
